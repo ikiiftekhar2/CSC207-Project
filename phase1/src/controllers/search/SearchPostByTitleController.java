@@ -49,6 +49,4 @@ public class SearchPostByTitleController extends RequestController {
 
         return false;
     }
-
-
 }

@@ -44,5 +44,4 @@ public class SearchUserByUsernameController extends RequestController{
         presenter.printMessages(result, "\n");
         return false;
     }
-
 }

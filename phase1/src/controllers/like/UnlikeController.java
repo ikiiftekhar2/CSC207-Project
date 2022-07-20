@@ -49,10 +49,7 @@ public class UnlikeController extends RequestController{
             else {
                 presenter.blockPrint("Error: like was not created so cannot be unliked");
             }
-            return false;
         }
-        else {
-            return false;
-        }
+        return false;
     }
 }

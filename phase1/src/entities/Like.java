@@ -11,7 +11,6 @@ public class Like implements Serializable {
      * the username of the user liking the parent Post or Comment
      */
     String liker;
-
     /**
      * the unique id of the like
      */

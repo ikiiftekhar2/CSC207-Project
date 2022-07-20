@@ -45,11 +45,10 @@ public class AddLikeController extends RequestController{
                 String[] attributes = new String[]{"postID", "liker", "id"};
                 likeModel.addItem(likeManager.getLike(likeID), attributes);
                 presenter.blockPrint("Like successfully created");
-                return false;
             } else {
                 presenter.blockPrint("You cannot like a post twice");
-                return false;
             }
+            return false;
         }
         else {
             sleeper.sleep(200);

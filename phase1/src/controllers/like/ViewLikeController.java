@@ -50,12 +50,9 @@ public class ViewLikeController extends RequestController{
         LikePresenter likePresenter = new LikePresenter();
         likePresenter.printTotalLikes(likeManager.totalLikesUnder(UUID.fromString(requester)));
         likePresenter.printLikes(likeModel.getModel());
-
-
         RequestFacade viewLikeFacade = new RequestFacade(
                 new RequestController[] {
                         new ReturnController()
-
                 }
         );
         viewLikeFacade.setRequester(requester);

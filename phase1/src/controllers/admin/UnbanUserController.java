@@ -5,8 +5,6 @@ import exception.UserIsAdminException;
 import exception.UsernameNotFoundException;
 import useCases.IAccountManager;
 
-import java.util.Scanner;
-
 public class UnbanUserController extends RequestController {
     /**
      * Constructor for a controller responsible for handling input related to unbanning an account.
@@ -31,9 +29,9 @@ public class UnbanUserController extends RequestController {
     @Override
     public boolean handleRequest(String requester) {
         try {
-            Scanner scanner = new Scanner(System.in);
+            presenter.input();
             presenter.inlinePrint("Enter the username of the account to unban: ");
-            String target = scanner.nextLine();
+            String target = presenter.input.nextLine();
             sleeper.sleep(200);
             if (accountManager.unban(target)) {
                 presenter.blockPrint("Successfully unbanned account " + target + ".");

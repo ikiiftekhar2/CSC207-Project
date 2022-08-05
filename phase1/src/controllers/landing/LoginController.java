@@ -17,8 +17,6 @@ import useCases.ICommentManager;
 import useCases.ILikeManager;
 import useCases.IPostManager;
 
-import java.util.Scanner;
-
 public class LoginController extends RequestController {
     /**
      * a request facade containing request controllers for admins
@@ -89,11 +87,11 @@ public class LoginController extends RequestController {
      */
     @Override
     public boolean handleRequest(String requester) {
-        Scanner scanner = new Scanner(System.in);
+        presenter.input();
         presenter.inlinePrint("Enter your username: ");
-        String username = scanner.nextLine();
+        String username = presenter.input.nextLine();
         presenter.inlinePrint("Enter your password: ");
-        String password = scanner.nextLine();
+        String password = presenter.input.nextLine();
         sleeper.sleep(200);
         try {
             accountManager.login(username, password);

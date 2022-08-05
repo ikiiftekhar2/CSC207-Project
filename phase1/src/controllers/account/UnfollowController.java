@@ -5,8 +5,6 @@ import exception.UserNotFollowedException;
 import exception.UsernameNotFoundException;
 import useCases.IAccountManager;
 
-import java.util.Scanner;
-
 public class UnfollowController extends RequestController {
     /**
      * a use case responsible for managing accounts
@@ -36,9 +34,9 @@ public class UnfollowController extends RequestController {
     @Override
     public boolean handleRequest(String requester) {
         try {
-            Scanner scanner = new Scanner(System.in);
+            presenter.input();
             presenter.blockPrint("Enter the username of the account you wish to unfollow: ");
-            String target = scanner.nextLine();
+            String target = presenter.input.nextLine();
             sleeper.sleep(200);
             accountManager.unfollow(requester, target);
             presenter.blockPrint("Successfully unfollowed user: " + target);

@@ -1,7 +1,5 @@
 package controllers.landing;
 
-import java.util.Scanner;
-
 import controllers.appWide.RequestController;
 import controllers.appWide.RequestFacade;
 import controllers.account.UnfollowController;
@@ -78,11 +76,11 @@ public class SignUpController extends RequestController {
      */
     @Override
     public boolean handleRequest(String requester) {
-        Scanner scanner = new Scanner(System.in);
+        presenter.input();
         presenter.inlinePrint("Enter your username: ");
-        String username = scanner.nextLine();
+        String username = presenter.input.nextLine();
         presenter.inlinePrint("Enter your password: ");
-        String password = scanner.nextLine();
+        String password = presenter.input.nextLine();
         try {
             accountManager.signUp(username, password);
             presenter.blockPrint("Successfully signed up.");

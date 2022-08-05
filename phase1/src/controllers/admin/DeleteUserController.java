@@ -6,8 +6,6 @@ import exception.UsernameNotFoundException;
 import useCases.IAccountManager;
 import useCases.IPostManager;
 
-import java.util.Scanner;
-
 public class DeleteUserController extends RequestController {
     /**
      * Constructor for a controller responsible for handling input related to deleting others' account.
@@ -34,9 +32,9 @@ public class DeleteUserController extends RequestController {
     @Override
     public boolean handleRequest(String requester) {
         try {
-            Scanner scanner = new Scanner(System.in);
+            presenter.input();
             presenter.inlinePrint("Enter the username of the account you wish to delete: ");
-            String target = scanner.nextLine();
+            String target = presenter.input.nextLine();
             accountManager.deleteUser(target);
             postManager.deletePostsWrittenBy(target);
             presenter.blockPrint("Successfully deleted user: " + target);

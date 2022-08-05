@@ -4,7 +4,6 @@ import controllers.appWide.RequestController;
 import useCases.IPostManager;
 import dataMapper.DataMapper;
 
-import java.util.Scanner;
 import java.util.UUID;
 
 public class AddPostController extends RequestController {
@@ -34,11 +33,11 @@ public class AddPostController extends RequestController {
      */
     @Override
     public boolean handleRequest(String requester) {
-        Scanner scanner = new Scanner(System.in);
+        presenter.input();
         presenter.inlinePrint("Title: ");
-        String title = scanner.nextLine();
+        String title = presenter.input.nextLine();
         presenter.inlinePrint("Content: ");
-        String content = scanner.nextLine();
+        String content = presenter.input.nextLine();
         UUID postId = postManager.addPost(title, content, requester);
         String[] attributes = new String[]{"author", "title", "content", "id", "timePosted"};
         postModel.addItem(postManager.getPost(postId), attributes);

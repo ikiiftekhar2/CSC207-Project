@@ -6,7 +6,6 @@ import useCases.ILikeManager;
 
 import java.util.*;
 
-
 public class UnlikeController extends RequestController{
     /**
      * a data mapper responsible for mapping likes into a data structure usable by the presenters
@@ -35,9 +34,9 @@ public class UnlikeController extends RequestController{
      */
     @Override
     public boolean handleRequest(String requester){
-        Scanner scanner = new Scanner(System.in);
+        presenter.input();
         presenter.inlinePrint("Unlike?: ");
-        String response = scanner.nextLine();
+        String response = presenter.input.nextLine();
         if ((response.equals("yes") || response.equals("Yes") || response.equals("YES"))) {
             sleeper.sleep(200);
             UUID likeId = likeManager.getIdFromPostId(UUID.fromString(requester), liker);

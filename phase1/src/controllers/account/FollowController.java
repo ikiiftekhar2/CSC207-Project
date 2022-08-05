@@ -5,8 +5,6 @@ import exception.UserFollowedException;
 import exception.UsernameNotFoundException;
 import useCases.IAccountManager;
 
-import java.util.Scanner;
-
 public class FollowController extends RequestController {
     /**
      * a use case responsible for managing accounts
@@ -36,9 +34,9 @@ public class FollowController extends RequestController {
     @Override
     public boolean handleRequest(String requester) {
         try {
-            Scanner scanner = new Scanner(System.in);
+            presenter.input();
             presenter.inlinePrint("Enter the username of the account you wish to follow: ");
-            String target = scanner.nextLine();
+            String target = presenter.input.nextLine();
             sleeper.sleep(200);
             if (!requester.equals(target)) {
                 accountManager.follow(requester, target);

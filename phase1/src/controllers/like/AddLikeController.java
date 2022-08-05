@@ -34,9 +34,9 @@ public class AddLikeController extends RequestController{
      */
     @Override
     public boolean handleRequest(String requester){
-        Scanner scanner = new Scanner(System.in);
+        presenter.input();
         presenter.inlinePrint("Like?: ");
-        String response = scanner.nextLine();
+        String response = presenter.input.nextLine();
         if ((response.equals("yes") || response.equals("Yes") || response.equals("YES"))) {
             sleeper.sleep(200);
             UUID likeID = likeManager.addLike(UUID.fromString(requester), liker);

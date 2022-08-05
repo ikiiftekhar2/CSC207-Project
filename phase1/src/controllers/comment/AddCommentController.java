@@ -4,7 +4,6 @@ import controllers.appWide.RequestController;
 import dataMapper.DataMapper;
 import useCases.ICommentManager;
 
-import java.util.Scanner;
 import java.util.UUID;
 
 public class AddCommentController extends RequestController {
@@ -44,9 +43,9 @@ public class AddCommentController extends RequestController {
      */
     @Override
     public boolean handleRequest(String requester) {
-        Scanner scanner = new Scanner(System.in);
+        presenter.input();
         presenter.inlinePrint("Comment: ");
-        String content = scanner.nextLine();
+        String content = presenter.input.nextLine();
         sleeper.sleep(200);
         UUID commentId = commentManager.addComment(UUID.fromString(requester), content, author);
         String[] attributes = new String[]{"postId", "content", "author", "id"};

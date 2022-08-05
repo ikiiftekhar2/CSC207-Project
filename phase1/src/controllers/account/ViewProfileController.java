@@ -12,8 +12,6 @@ import useCases.ICommentManager;
 import useCases.ILikeManager;
 import useCases.IPostManager;
 
-import java.util.Scanner;
-
 public class ViewProfileController extends RequestController {
     /**
      * a use case responsible for managing posts
@@ -84,9 +82,9 @@ public class ViewProfileController extends RequestController {
 
     @Override
     protected boolean handleRequest(String requester) {
-        Scanner scanner = new Scanner(System.in);
+        presenter.input();
         presenter.inlinePrint("Enter the username of the profile you wish to view or nothing to exit: ");
-        String target = scanner.nextLine();
+        String target = presenter.input.nextLine();
         sleeper.sleep(200);
         if (target.equals(requester)) {
             new ViewSelfProfileController(postManager, commentManager,likeManager).handleRequest(requester);

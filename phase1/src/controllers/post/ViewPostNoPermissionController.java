@@ -16,7 +16,6 @@ import useCases.IPostManager;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Scanner;
 
 public class ViewPostNoPermissionController extends RequestController {
     /**
@@ -81,9 +80,9 @@ public class ViewPostNoPermissionController extends RequestController {
             ArrayList<HashMap<String, String>> posts = postModel.getModel();
             PostPresenter postPresenter = new PostPresenter();
             postPresenter.printPosts(posts);
-            Scanner scanner = new Scanner(System.in);
+            presenter.input();
             presenter.inlinePrint("Enter the number of the post you wish to view or 0 to return to your profile: ");
-            int request = Integer.parseInt(scanner.nextLine());
+            int request = Integer.parseInt(presenter.input.nextLine());
             if (request == 0) {
                 return false;
             } else if (request  <= posts.size()) {

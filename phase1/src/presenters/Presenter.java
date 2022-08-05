@@ -1,6 +1,8 @@
 package presenters;
 
+import java.util.Scanner;
 public class Presenter {
+    public Scanner input;
     /**
      * Prints a message to the user. After printing, a new line is not created.
      *
@@ -17,6 +19,11 @@ public class Presenter {
      */
     public void blockPrint(String message) {
         System.out.println(message);
+    }
+
+    public Scanner input(){
+        input = new Scanner(System.in);
+        return input;
     }
 
     /**

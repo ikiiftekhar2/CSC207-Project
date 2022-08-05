@@ -4,8 +4,6 @@ import controllers.appWide.RequestController;
 import exception.*;
 import useCases.IAccountManager;
 
-import java.util.Scanner;
-
 public class PromoteUserController extends RequestController {
     /**
      * Constructor for a controller responsible for handling input related to promoting a user to admin.
@@ -30,9 +28,9 @@ public class PromoteUserController extends RequestController {
     @Override
     public boolean handleRequest(String requester) {
         try {
-            Scanner scanner = new Scanner(System.in);
+            presenter.input();
             presenter.inlinePrint("Enter username of account to promote: ");
-            String target = scanner.nextLine();
+            String target = presenter.input.nextLine();
             sleeper.sleep(200);
             accountManager.promoteToAdmin(target);
             presenter.blockPrint("Successfully promoted user " + target + " to admin.");

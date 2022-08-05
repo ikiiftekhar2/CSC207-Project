@@ -6,7 +6,6 @@ import useCases.IPostManager;
 import gateway.SearchByTitle;
 import controllers.appWide.RequestController;
 
-
 import java.util.*;
 
 public class SearchPostByTitleController extends RequestController {
@@ -39,9 +38,9 @@ public class SearchPostByTitleController extends RequestController {
      */
     @Override
     public boolean handleRequest(String requester){
-        Scanner scanner = new Scanner(System.in);
+        presenter.input();
         presenter.inlinePrint("Enter the title of the post you wish to search: ");
-        String title = scanner.nextLine();
+        String title = presenter.input.nextLine();
         sleeper.sleep(200);
         ArrayList<String> result = searcher.doSearch(title);
         presenter.inlinePrint("Here are the top search results:");

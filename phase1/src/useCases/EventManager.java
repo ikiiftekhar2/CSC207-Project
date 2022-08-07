@@ -1,9 +1,7 @@
 package useCases;
 
 import entities.Event;
-import entities.Post;
 import gateway.IEventSorter;
-import gateway.IPostSorter;
 import gateway.IReader;
 import gateway.IWriter;
 
@@ -12,7 +10,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.UUID;
 
-public class EventManager implements IPostManager{
+public class EventManager implements IEventManager{
     /**
      * a mapping of id of the post to the events entity
      */
@@ -64,7 +62,7 @@ public class EventManager implements IPostManager{
     @Override
     public void deleteEventsHostedBy(String username) {
         for (Event event : getEventsHostedBy(username)) {
-            deletePost(event.getId());
+            deleteEvent(event.getId());
         }
     }
 
@@ -76,7 +74,7 @@ public class EventManager implements IPostManager{
      * @inheritDoc
      */
     @Override
-    public UUID addPost(String title, String description, String host, Boolean inviteOnly, HashSet<String> invitees) {
+    public UUID addEvent(String title, String description, String host, Boolean inviteOnly, HashSet<String> invitees) {
         Event event = createEvent(title, description, host, inviteOnly, invitees);
         events.put(event.getId(), event);
         return event.getId();
@@ -111,13 +109,13 @@ public class EventManager implements IPostManager{
      * @inheritDoc
      */
     @Override
-    public HashMap<UUID, Event> getEventsMap(){
+    public HashMap<UUID, Event> getEventMap(){
         return events;
     }
 
 
     @Override
-    public void setPostSorter(IEventSorter eventSorter) {
+    public void setEventSorter(IEventSorter eventSorter) {
         this.eventSorter = eventSorter;
     }
 

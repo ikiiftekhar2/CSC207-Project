@@ -3,6 +3,7 @@ package entities;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.UUID;
 
 public class Event implements Serializable {
@@ -29,7 +30,11 @@ public class Event implements Serializable {
     /**
      * the attendees of the event
      */
-    HashMap<String, Boolean> attendees;
+    HashSet<String> attendees;
+    /**
+     * the attendees of the event
+     */
+    HashSet<String> invitees; /// add invitees to attendees with observer pattern
     /**
      * the time in which the event was created
      */
@@ -39,14 +44,14 @@ public class Event implements Serializable {
      */
     UUID id;
 
-    public Event(String title, String description, String host, Boolean inviteOnly, HashMap<String, Boolean> attendees) {
+    public Event(String title, String description, String host, Boolean inviteOnly, HashSet<String> invitees) {
         this.title = title;
         this.description = description;
         this.host = host;
         this.timePosted = LocalDateTime.now();
         id = UUID.randomUUID();
         this.inviteOnly = inviteOnly;
-        this.attendees = attendees;
+        this.invitees = invitees;
     }
 
     public void setTitle(String title) {
@@ -66,8 +71,12 @@ public class Event implements Serializable {
         this.queries.put(data.getId(), data);
     }
 
-    public void setAttendees(String username, Boolean anttending) {
-        this.attendees.put(username, anttending);
+    public void setAttendees(String username) {
+        this.attendees.add(username);
+    }
+
+    public void setInvitees(HashSet<String> invitees) {
+        this.invitees = invitees;
     }
 
     public LocalDateTime getTimePosted() {
@@ -98,7 +107,7 @@ public class Event implements Serializable {
         return queries;
     }
 
-    public HashMap<String, Boolean> getAttendees() {
+    public HashSet<String> getAttendees() {
         return attendees;
     }
 }

@@ -2,7 +2,7 @@ package controllers.appWide;
 
 import presenters.Presenter;
 
-import java.util.Scanner;
+
 
 public class RequestFacade {
     /**
@@ -56,9 +56,9 @@ public class RequestFacade {
     public void presentRequest() {
         presenter.blockPrint("");
         presenter.blockPrint(requests);
-        Scanner scanner = new Scanner(System.in);
+        presenter.input();
         presenter.inlinePrint("Please enter your request: ");
-        String request = scanner.nextLine();
+        String request = presenter.input.nextLine();
         presenter.blockPrint("");
         handleRequest(request);
     }

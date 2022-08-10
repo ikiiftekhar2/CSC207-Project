@@ -1,6 +1,7 @@
 package entities;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -36,7 +37,10 @@ public class Account implements Serializable {
      * a set of usernames of the account's followees
      */
     HashSet<String> followees = new HashSet<>();
-
+    /**
+     * a inbox of messages sent to the user
+     */
+    HashMap<String, String> inbox;
     public Account(String username, String hashedPassword) {
         this.username = username;
         this.hashedPassword = hashedPassword;

@@ -42,13 +42,13 @@ public class AddEventController extends RequestController {
         boolean inviteOnly = false;
         boolean flag = true;
         HashSet<String> invitees = new HashSet<>();
-        presenter.inlinePrint("Do you want the event to be Invite-Only?");
+        presenter.inlinePrint("Do you want the event to be Invite-Only? ");
         String invitationRequirement = presenter.input.nextLine();
         if ((invitationRequirement.equals("yes") || invitationRequirement.equals("Yes") || invitationRequirement.equals("YES"))) {
             inviteOnly = true;
         }
         presenter.inlinePrint("Enter the usernames of people you want to invite to the event, type 0 to stop");
-        presenter.inlinePrint("  ");
+        presenter.inlinePrint("\n");
         while (flag) {
             String response = presenter.input.nextLine();
             if (response.equals("0")){

@@ -93,6 +93,7 @@ public class ViewEventHostController extends RequestController{
                         new DeleteEventController(eventModel, eventManager),
                         new AddCommentController(commentModel, commentManager, requester),
                         new ViewCommentController(commentModel, commentManager),
+                        new ChangeInviteRequirementController(eventModel, eventManager),
                         new AddLikeController(likeModel,likeManager,requester),
                         new UnlikeController(likeModel,likeManager,requester),
                         new ViewLikeController(likeModel, likeManager),

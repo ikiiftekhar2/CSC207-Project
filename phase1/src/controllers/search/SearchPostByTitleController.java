@@ -3,7 +3,7 @@ package controllers.search;
 import gateway.ISearch;
 
 import useCases.IPostManager;
-import gateway.SearchByTitle;
+import searchHandler.SearchByTitle;
 import controllers.appWide.RequestController;
 
 import java.util.*;
@@ -34,7 +34,7 @@ public class SearchPostByTitleController extends RequestController {
     public String getRequestDescription() { return "Search for a post by its title"; }
 
     /**
-     * @inheritDOc
+     * @inheritDoc
      */
     @Override
     public boolean handleRequest(String requester){

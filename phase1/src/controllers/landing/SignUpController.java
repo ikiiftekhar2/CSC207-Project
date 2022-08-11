@@ -10,11 +10,8 @@ import controllers.search.SearchUserByUsernameController;
 import exception.InvalidUsernameException;
 import exception.UsernameExistsException;
 import gateway.ISearch;
-import gateway.SearchByUsernameRegular;
-import useCases.ICommentManager;
-import useCases.ILikeManager;
-import useCases.IPostManager;
-import useCases.IAccountManager;
+import searchHandler.SearchByUsernameRegular;
+import useCases.*;
 
 
 public class SignUpController extends RequestController {
@@ -34,6 +31,10 @@ public class SignUpController extends RequestController {
      * a request facade containing request controllers for comments
      */
     private ICommentManager commentManager;
+    /**
+     * a request facade containing request controllers for comments
+     */
+    private IEventManager eventManager;
 
     /**
      * Constructor for a controller responsible for reading input to sign users up.
@@ -42,7 +43,7 @@ public class SignUpController extends RequestController {
      * @param postManager    a use case responsible for managing posts
      * @param commentManager a use case responsible for managing comments
      */
-    public SignUpController(IAccountManager accountManager, IPostManager postManager, ICommentManager commentManager, ILikeManager likeManager) {
+    public SignUpController(IAccountManager accountManager, IPostManager postManager, ICommentManager commentManager, ILikeManager likeManager, IEventManager eventManager) {
         this.accountManager = accountManager;
         this.commentManager = commentManager;
 
@@ -54,6 +55,8 @@ public class SignUpController extends RequestController {
             new UnfollowController(accountManager),
             new ViewFollowerController(accountManager),
             new ViewFollowingController(accountManager),
+                new ViewOtherEvents(eventManager, accountManager, commentManager, likeManager),
+                new ViewSelfEvents(eventManager, commentManager, likeManager),
             new ViewSelfProfileController(postManager, commentManager, likeManager),
             new ViewFeedController(postManager, accountManager, commentManager, likeManager),
                 new ViewProfileController(accountManager, postManager, commentManager, likeManager),

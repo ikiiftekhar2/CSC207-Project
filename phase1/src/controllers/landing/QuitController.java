@@ -1,10 +1,7 @@
 package controllers.landing;
 
 import controllers.appWide.RequestController;
-import useCases.IAccountManager;
-import useCases.ICommentManager;
-import useCases.ILikeManager;
-import useCases.IPostManager;
+import useCases.*;
 
 public class QuitController extends RequestController {
     /**
@@ -24,6 +21,8 @@ public class QuitController extends RequestController {
      */
     ILikeManager likeManager;
 
+    IEventManager eventManager;
+
     /**
      * Constructor for a controller responsible for reading input to log users out.
      *
@@ -31,11 +30,12 @@ public class QuitController extends RequestController {
      * @param postManager    a use case responsible for managing posts
      * @param likeManager    a use case responsible for managing likes
      */
-    public QuitController(IAccountManager accountManager, IPostManager postManager, ICommentManager commentManager, ILikeManager likeManager) {
+    public QuitController(IAccountManager accountManager, IPostManager postManager, ICommentManager commentManager, ILikeManager likeManager, IEventManager eventManager) {
         this.accountManager = accountManager;
         this.postManager = postManager;
         this.commentManager = commentManager;
         this.likeManager = likeManager;
+        this.eventManager = eventManager;
     }
 
     /**
@@ -55,6 +55,7 @@ public class QuitController extends RequestController {
         postManager.save();
         commentManager.save();
         likeManager.save();
+        eventManager.save();
         return true;
     }
 }

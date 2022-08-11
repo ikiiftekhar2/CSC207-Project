@@ -104,7 +104,11 @@ public class EventManager implements IEventManager{
         writer.write(events);
     }
 
-
+    public Boolean acceptInvite(String username, UUID id){
+        Event curr = getEvent(id);
+        curr.addAttendees(username);
+        return true;
+    }
     /**
      * @inheritDoc
      */
@@ -113,7 +117,19 @@ public class EventManager implements IEventManager{
         return events;
     }
 
-
+    public Boolean attendEvent(String username, UUID id){
+        Event event = getEvent(id);
+        if (event.getInviteOnly()) {
+            if (event.getInvitees().contains(username)) {
+                event.addAttendees(username);
+                return true;
+            }
+            return false;
+        } else {
+            event.addAttendees(username);
+            return true;
+        }
+    }
     @Override
     public void setEventSorter(IEventSorter eventSorter) {
         this.eventSorter = eventSorter;

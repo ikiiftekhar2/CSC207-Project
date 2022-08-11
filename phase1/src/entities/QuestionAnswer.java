@@ -2,6 +2,7 @@ package entities;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.UUID;
 
 public class QuestionAnswer implements Serializable {
@@ -12,7 +13,7 @@ public class QuestionAnswer implements Serializable {
     /**
      * the answer
      */
-    String answer;
+    HashSet<String> answer;
     /**
      * the username of the user that asked the question
      */
@@ -37,12 +38,12 @@ public class QuestionAnswer implements Serializable {
         return question;
     }
 
-    public String getAnswer() {
+    public HashSet<String> getAnswer() {
         return answer;
     }
 
-    public void setAnswer(String answer) {
-        this.answer = answer;
+    public void addAnswer(String answer) {
+        this.answer.add(answer);
     }
 
     public String getAuthor() {

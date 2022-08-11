@@ -4,18 +4,16 @@ import controllers.account.*;
 import controllers.admin.*;
 import controllers.appWide.RequestController;
 import controllers.appWide.RequestFacade;
+import controllers.event.ViewEventHostController;
 import controllers.search.SearchPostByTitleController;
 import controllers.search.SearchUserByUsernameController;
 import exception.IncorrectPasswordException;
 import exception.UsernameNotFoundException;
 import exception.AccountBannedException;
 import gateway.ISearch;
-import gateway.SearchByUsernameAdmin;
-import gateway.SearchByUsernameRegular;
-import useCases.IAccountManager;
-import useCases.ICommentManager;
-import useCases.ILikeManager;
-import useCases.IPostManager;
+import searchHandler.SearchByUsernameAdmin;
+import searchHandler.SearchByUsernameRegular;
+import useCases.*;
 
 public class LoginController extends RequestController {
     /**
@@ -35,12 +33,14 @@ public class LoginController extends RequestController {
      * @param commentManager a user case responsible for managing comments
      * @param likeManager    a use case responsible for managing likes
      */
-    public LoginController(IAccountManager accountManager, IPostManager postManager, ICommentManager commentManager, ILikeManager likeManager){
+    public LoginController(IAccountManager accountManager, IPostManager postManager, ICommentManager commentManager, ILikeManager likeManager, IEventManager eventManager){
         this.accountManager = accountManager;
         ISearch searchForRegularUsers = new SearchByUsernameRegular(accountManager);
         ISearch searchForAdmin = new SearchByUsernameAdmin(accountManager);
         accountRequestFacade = new RequestFacade(new RequestController[]{
                 new ViewHistoryController(accountManager),
+                new ViewOtherEvents(eventManager, accountManager, commentManager, likeManager),
+                new ViewSelfEvents(eventManager, commentManager, likeManager),
                 new DeleteSelfController(accountManager, postManager),
                 new FollowController(accountManager),
                 new UnfollowController(accountManager),
@@ -56,6 +56,8 @@ public class LoginController extends RequestController {
         adminRequestFacade = new RequestFacade(new RequestController[]{
                 new BanUserController(accountManager),
                 new UnbanUserController(accountManager),
+                new ViewOtherEvents(eventManager, accountManager, commentManager, likeManager),
+                new ViewSelfEvents(eventManager, commentManager, likeManager),
                 new PromoteUserController(accountManager),
                 new CreateAdminController(accountManager),
                 new DeleteUserController(accountManager, postManager),

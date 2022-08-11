@@ -34,7 +34,7 @@ public class Event implements Serializable {
     /**
      * the attendees of the event
      */
-    HashSet<String> invitees; /// add invitees to attendees with observer pattern
+    HashSet<String> invitees;
     /**
      * the time in which the event was created
      */
@@ -52,6 +52,8 @@ public class Event implements Serializable {
         id = UUID.randomUUID();
         this.inviteOnly = inviteOnly;
         this.invitees = invitees;
+        this.attendees = new HashSet<String>();
+        this.queries = new HashMap<UUID, QuestionAnswer>();
     }
 
     public void setTitle(String title) {
@@ -66,17 +68,17 @@ public class Event implements Serializable {
         this.description = description;
     }
 
-    public void setQueries(String question, String username) {
+    public void addQueries(String question, String username) {
         QuestionAnswer data = new QuestionAnswer(question, username);
         this.queries.put(data.getId(), data);
     }
 
-    public void setAttendees(String username) {
+    public void addAttendees(String username) {
         this.attendees.add(username);
     }
 
-    public void setInvitees(HashSet<String> invitees) {
-        this.invitees = invitees;
+    public void addInvitees(String username) {
+        this.invitees.add(username);
     }
 
     public LocalDateTime getTimePosted() {
@@ -109,5 +111,9 @@ public class Event implements Serializable {
 
     public HashSet<String> getAttendees() {
         return attendees;
+    }
+
+    public HashSet<String> getInvitees() {
+        return invitees;
     }
 }

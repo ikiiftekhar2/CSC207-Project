@@ -2,7 +2,6 @@ package controllers.search;
 
 import gateway.ISearch;
 import useCases.IAccountManager;
-import gateway.SearchByUsernameRegular;
 import controllers.appWide.RequestController;
 
 import java.util.*;

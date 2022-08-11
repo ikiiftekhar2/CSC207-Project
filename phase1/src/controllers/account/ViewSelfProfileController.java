@@ -5,13 +5,15 @@ import controllers.appWide.RequestFacade;
 import controllers.appWide.ReturnController;
 import controllers.post.AddPostController;
 import controllers.post.ViewPostPermissionController;
+import controllers.message.ViewInboxController;
+import controllers.message.AddMessageController;
 import gateway.PostTimeSorter;
 import presenters.PostPresenter;
 import useCases.ICommentManager;
 import useCases.ILikeManager;
 import useCases.IPostManager;
 import dataMapper.DataMapper;
-
+import useCases.IMessageManager;
 import gateway.IPostSorter;
 
 public class ViewSelfProfileController extends RequestController {
@@ -39,16 +41,24 @@ public class ViewSelfProfileController extends RequestController {
      * a use case responsible for managing likes
      */
     ILikeManager likeManager;
-
+    /**
+     * a use case responsible for managing messages
+     */
+    IMessageManager messageManager;
+    /**
+     * a DataMapper to store messages
+     */
+    DataMapper messageModel = new DataMapper();
     /**
      * Constructor for a controller responsible for handling input related to viewing a user's own profile.
      *
      * @param postManager  a use case responsible for managing posts
      */
-    public ViewSelfProfileController(IPostManager postManager, ICommentManager commentManager, ILikeManager likeManager) {
+    public ViewSelfProfileController(IPostManager postManager, ICommentManager commentManager, ILikeManager likeManager, IMessageManager messageManager) {
         this.postManager = postManager;
         this.commentManager = commentManager;
         this.likeManager = likeManager;
+        this.messageManager = messageManager;
     }
 
     /**
@@ -76,6 +86,8 @@ public class ViewSelfProfileController extends RequestController {
             new RequestController[] {
                     new AddPostController(postModel, postManager),
                     new ViewPostPermissionController(postModel, postManager, commentModel, commentManager,likeManager, likeModel),
+                    new AddMessageController(messageModel, messageManager, requester),
+                    new ViewInboxController(messageModel, messageManager),
                     new ReturnController()
             }
         );

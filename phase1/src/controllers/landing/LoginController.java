@@ -33,7 +33,7 @@ public class LoginController extends RequestController {
      * @param commentManager a user case responsible for managing comments
      * @param likeManager    a use case responsible for managing likes
      */
-    public LoginController(IAccountManager accountManager, IPostManager postManager, ICommentManager commentManager, ILikeManager likeManager, IEventManager eventManager){
+    public LoginController(IAccountManager accountManager, IPostManager postManager, ICommentManager commentManager, ILikeManager likeManager,IMessageManager messageManager, IEventManager eventManager){
         this.accountManager = accountManager;
         ISearch searchForRegularUsers = new SearchByUsernameRegular(accountManager);
         ISearch searchForAdmin = new SearchByUsernameAdmin(accountManager);
@@ -46,9 +46,9 @@ public class LoginController extends RequestController {
                 new UnfollowController(accountManager),
                 new ViewFollowerController(accountManager),
                 new ViewFollowingController(accountManager),
-                new ViewSelfProfileController(postManager, commentManager, likeManager),
+                new ViewSelfProfileController(postManager, commentManager, likeManager, messageManager),
                 new ViewFeedController(postManager, accountManager, commentManager, likeManager),
-                new ViewProfileController(accountManager, postManager, commentManager, likeManager),
+                new ViewProfileController(accountManager, postManager, commentManager, likeManager, messageManager),
                 new SearchPostByTitleController(postManager),
                 new SearchUserByUsernameController(accountManager,searchForRegularUsers),
                 new LogoutController(),
@@ -67,9 +67,9 @@ public class LoginController extends RequestController {
                 new UnfollowController(accountManager),
                 new ViewFollowerController(accountManager),
                 new ViewFollowingController(accountManager),
-                new ViewSelfProfileController(postManager, commentManager, likeManager),
+                new ViewSelfProfileController(postManager, commentManager, likeManager, messageManager),
                 new ViewFeedController(postManager, accountManager, commentManager, likeManager),
-                new ViewProfileController(accountManager, postManager, commentManager, likeManager),
+                new ViewProfileController(accountManager, postManager, commentManager, likeManager, messageManager),
                 new SearchPostByTitleController(postManager),
                 new SearchUserByUsernameController(accountManager, searchForAdmin),
                 new LogoutController(),

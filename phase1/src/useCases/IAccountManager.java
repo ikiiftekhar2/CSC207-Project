@@ -4,6 +4,7 @@ import entities.Account;
 import exception.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -168,4 +169,14 @@ public interface IAccountManager {
      * Returns the mapping of username of all accounts to all account entities
      */
     HashMap<String, Account> getMap();
+
+    /**
+     * Adds the given string message to the inbox of the given user
+     */
+    void addToInbox(String sender, String receiver, String content) throws UsernameNotFoundException;
+
+    /**
+     * View the inbox of the given username
+     */
+    HashMap<String, String> viewInbox(String username);
 }

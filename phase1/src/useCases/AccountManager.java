@@ -274,6 +274,30 @@ public class AccountManager implements IAccountManager {
      * @inheritDoc
      */
     @Override
+    public void addToInbox(String sender, String receiver, String content) throws UsernameNotFoundException {
+        if (!containsUser(receiver)) {
+            throw new UsernameNotFoundException("Unsuccessful, the account" + receiver + " does not exist");
+        }
+        else if (!containsUser(sender)) {
+            throw new UsernameNotFoundException("You need to create an account first in order to send messages");
+        }
+        Account receiverAccount = accountMap.get(receiver);
+        receiverAccount.addToInbox(sender,content);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
+    public HashMap<String, String> viewInbox(String username){
+        Account userAccount = accountMap.get(username);
+        return userAccount.getInbox();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
     public void save() {
         writer.write(accountMap);
     }

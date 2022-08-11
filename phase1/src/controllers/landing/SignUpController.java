@@ -35,18 +35,24 @@ public class SignUpController extends RequestController {
      * a request facade containing request controllers for comments
      */
     private IEventManager eventManager;
-
+    /**
+     * a use case responsible for managing messages
+     */
+    private IMessageManager messageManager;
     /**
      * Constructor for a controller responsible for reading input to sign users up.
      *
      * @param accountManager a use case responsible for managing accounts
      * @param postManager    a use case responsible for managing posts
      * @param commentManager a use case responsible for managing comments
+     * @param likeManager a use case responsible for managing likes
+     * @param messageManager a use case responsible for managing messages
+     * @param eventManager a use case responsible for managing events
      */
-    public SignUpController(IAccountManager accountManager, IPostManager postManager, ICommentManager commentManager, ILikeManager likeManager, IEventManager eventManager) {
+    public SignUpController(IAccountManager accountManager, IPostManager postManager, ICommentManager commentManager, ILikeManager likeManager, IMessageManager messageManager,IEventManager eventManager) {
         this.accountManager = accountManager;
         this.commentManager = commentManager;
-
+        this.messageManager = messageManager;
         ISearch searchForRegularUsers = new SearchByUsernameRegular(accountManager);
         accountRequestFacade = new RequestFacade(new RequestController[]{
             new ViewHistoryController(accountManager),
@@ -57,9 +63,9 @@ public class SignUpController extends RequestController {
             new ViewFollowingController(accountManager),
                 new ViewOtherEvents(eventManager, accountManager, commentManager, likeManager),
                 new ViewSelfEvents(eventManager, commentManager, likeManager),
-            new ViewSelfProfileController(postManager, commentManager, likeManager),
+            new ViewSelfProfileController(postManager, commentManager, likeManager, messageManager),
             new ViewFeedController(postManager, accountManager, commentManager, likeManager),
-                new ViewProfileController(accountManager, postManager, commentManager, likeManager),
+                new ViewProfileController(accountManager, postManager, commentManager, likeManager, messageManager),
                 new SearchPostByTitleController(postManager),
                 new SearchUserByUsernameController(accountManager, searchForRegularUsers),
             new LogoutController(),

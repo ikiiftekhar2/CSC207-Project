@@ -40,14 +40,15 @@ public class Account implements Serializable {
     /**
      * a inbox of messages sent to the user
      */
-    HashMap<String, String> inbox;
+    HashMap<String, String> inbox = new HashMap<>();
     public Account(String username, String hashedPassword) {
         this.username = username;
         this.hashedPassword = hashedPassword;
         this.isBanned = false;
         this.isAdmin = false;
     }
-
+    public void addToInbox(String sender, String content) { inbox.put(sender, content); }
+    public HashMap<String, String> getInbox() { return inbox; }
     public void follow(String user) {
         followees.add(user);
     }

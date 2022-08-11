@@ -1,6 +1,5 @@
 package useCases;
 
-import entities.Account;
 import entities.Message;
 import gateway.IReader;
 import gateway.IWriter;

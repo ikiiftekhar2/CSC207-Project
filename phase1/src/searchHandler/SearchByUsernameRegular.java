@@ -1,8 +1,8 @@
-package gateway;
+package searchHandler;
 
 import entities.Account;
-
 import useCases.IAccountManager;
+import gateway.*;
 
 import java.util.*;
 

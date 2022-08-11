@@ -1,8 +1,8 @@
-package gateway;
+package searchHandler;
 
 import entities.Post;
 import useCases.IPostManager;
-
+import gateway.*;
 
 import java.util.*;
 

@@ -11,6 +11,7 @@ import useCases.IAccountManager;
 import useCases.ICommentManager;
 import useCases.ILikeManager;
 import useCases.IPostManager;
+import useCases.IMessageManager;
 
 public class ViewProfileController extends RequestController {
     /**
@@ -25,6 +26,14 @@ public class ViewProfileController extends RequestController {
      * a use case responsible for managing accounts
      */
     IAccountManager accountManager;
+    /**
+     * a use case responsible for managing messages
+     */
+    IMessageManager messageManager;
+    /**
+     * a data mapper responsible for mapping messages into a data structure usable by the presenters
+     */
+    DataMapper messageModel = new DataMapper();
     /**
      * a data mapper responsible for mapping posts into a data structure usable by the presenters
      */
@@ -45,11 +54,12 @@ public class ViewProfileController extends RequestController {
     public ViewProfileController(IAccountManager accountManager,
                                  IPostManager postManager,
                                  ICommentManager commentManager,
-                                 ILikeManager likeManager) {
+                                 ILikeManager likeManager, IMessageManager messageManager) {
         this.accountManager = accountManager;
         this.postManager = postManager;
         this.commentManager = commentManager;
         this.likeManager = likeManager;
+        this.messageManager = messageManager;
     }
 
 
@@ -87,7 +97,7 @@ public class ViewProfileController extends RequestController {
         String target = presenter.input.nextLine();
         sleeper.sleep(200);
         if (target.equals(requester)) {
-            new ViewSelfProfileController(postManager, commentManager,likeManager).handleRequest(requester);
+            new ViewSelfProfileController(postManager, commentManager,likeManager, messageManager).handleRequest(requester);
         } else if (accountManager.containsUser(target)) {
             showProfile(requester, target);
         } else if (!target.equals("")) {

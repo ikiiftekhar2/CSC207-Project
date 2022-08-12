@@ -92,6 +92,7 @@ public class ViewEventNotHostController extends RequestController {
                 RequestFacade eventRequests = new RequestFacade(new RequestController[]{
                         new AddCommentController(commentModel, commentManager, requester),
                         new ViewCommentController(commentModel, commentManager),
+                        new JoinEventController(eventModel ,eventManager, requester),
                         new AddLikeController(likeModel,likeManager,requester),
                         new UnlikeController(likeModel,likeManager,requester),
                         new ViewLikeController(likeModel, likeManager),

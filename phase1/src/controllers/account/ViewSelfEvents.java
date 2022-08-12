@@ -4,6 +4,8 @@ import controllers.appWide.RequestController;
 import controllers.appWide.RequestFacade;
 import controllers.appWide.ReturnController;
 import controllers.event.AddEventController;
+import controllers.event.ChangeInviteRequirementController;
+import controllers.event.DeleteEventController;
 import controllers.event.ViewEventHostController;
 import dataMapper.DataMapper;
 import gateway.EventTimeSorter;

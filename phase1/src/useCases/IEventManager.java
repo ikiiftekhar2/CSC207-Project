@@ -70,5 +70,5 @@ public interface IEventManager {
      */
     void setEventSorter(IEventSorter eventSorter);
 
-
+    Boolean attendEvent(String username, UUID id);
 }

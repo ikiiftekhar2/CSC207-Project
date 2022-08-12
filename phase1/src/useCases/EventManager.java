@@ -104,11 +104,6 @@ public class EventManager implements IEventManager{
         writer.write(events);
     }
 
-    public Boolean acceptInvite(String username, UUID id){
-        Event curr = getEvent(id);
-        curr.addAttendees(username);
-        return true;
-    }
     /**
      * @inheritDoc
      */
@@ -116,7 +111,7 @@ public class EventManager implements IEventManager{
     public HashMap<UUID, Event> getEventMap(){
         return events;
     }
-
+    @Override
     public Boolean attendEvent(String username, UUID id){
         Event event = getEvent(id);
         if (event.getInviteOnly()) {

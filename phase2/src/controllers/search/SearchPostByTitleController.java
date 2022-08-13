@@ -1,6 +1,9 @@
 package controllers.search;
 
 import gateway.ISearch;
+import gateway.ISimilarityScore;
+import gateway.SimilarityScoreLevenshtein;
+import gateway.SimilarityScoreJaroWrinkler;
 
 import useCases.IPostManager;
 import searchHandler.SearchByTitle;
@@ -24,7 +27,8 @@ public class SearchPostByTitleController extends RequestController {
      */
     public SearchPostByTitleController(IPostManager postManager){
         this.postManager = postManager;
-        searcher = new SearchByTitle(postManager);
+        ISimilarityScore similarityScoreLevenshtein = new SimilarityScoreLevenshtein();
+        searcher = new SearchByTitle(postManager, similarityScoreLevenshtein);
     }
 
     /**

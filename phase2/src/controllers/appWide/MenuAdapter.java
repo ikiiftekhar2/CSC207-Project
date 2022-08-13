@@ -1,14 +1,15 @@
 package controllers.appWide;
 
 import presenters.MenuPresenter;
-import controllers.appWide.RequestController;
+import presenters.TextMenuPresenter;
+
 import java.util.ArrayList;
 
 public class MenuAdapter implements IMenuAdapter{
     /**
      * a menu presenter responsible for building and printing menu options
      */
-    MenuPresenter menuPresenter = new MenuPresenter();
+    MenuPresenter menuPresenter = new TextMenuPresenter();
 
     /**
      * @inheritDoc

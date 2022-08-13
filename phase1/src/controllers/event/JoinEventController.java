@@ -32,7 +32,7 @@ public class JoinEventController extends RequestController {
         Boolean state = eventManager.attendEvent(joiner, UUID.fromString(requester));
         if (state) {
             eventModel.deleteItem("id", requester);
-            String[] attributes = new String[]{"title", "queries", "description", "host", "inviteOnly", "attendees", "invitees", "timePosted", "id"};
+            String[] attributes = new String[]{"title", "description", "host", "inviteOnly", "attendees", "invitees", "timePosted", "id"};
             eventModel.addItem(eventManager.getEvent(UUID.fromString(requester)), attributes);
             presenter.inlinePrint("Successfully Attending the event");
         } else {

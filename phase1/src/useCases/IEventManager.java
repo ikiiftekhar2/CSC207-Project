@@ -69,6 +69,20 @@ public interface IEventManager {
      * @param eventSorter an IPostSorter strategy for sorting comments
      */
     void setEventSorter(IEventSorter eventSorter);
-
+    /**
+     * Return the state if the user can attend the event or not
+     *
+     * @param username the username of the attendee
+     * @param id the id of the event the user wants to attend
+     */
     Boolean attendEvent(String username, UUID id);
+    /**
+     * Returns the event map of the events that require admin approval
+     */
+    HashMap<UUID, Event> getPendingEvents();
+    /**
+     * Returns the state of the state after all the pending events have been added to
+     * the central event list
+     */
+    Boolean approveAll();
 }

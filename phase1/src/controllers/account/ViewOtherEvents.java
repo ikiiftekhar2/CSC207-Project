@@ -3,6 +3,8 @@ package controllers.account;
 import controllers.appWide.RequestController;
 import controllers.appWide.RequestFacade;
 import controllers.appWide.ReturnController;
+import controllers.event.ApproveEventsController;
+import controllers.event.PendingEventController;
 import controllers.event.ViewEventNotHostController;
 import dataMapper.DataMapper;
 import entities.Event;
@@ -71,17 +73,20 @@ public class ViewOtherEvents extends RequestController {
         IEventSorter eventSorter = new EventTimeSorter();
         eventManager.setEventSorter(eventSorter);
         HashSet<String> followees = accountManager.getFolloweesOf(requester);
+        String uname = requester;
         ArrayList<Event> eventsList = new ArrayList<>();
         for (String followee : followees) { eventsList.addAll(eventManager.getEventsHostedBy(followee));}
         eventModel.reset();
         eventModel.addItems(
                 eventSorter.sort(eventsList),
-                new String[]{"title", "queries", "description", "host", "inviteOnly", "attendees", "invitees", "timePosted", "id"}
+                new String[]{"title", "description", "host", "inviteOnly", "attendees", "invitees", "timePosted", "id"}
         );
         EventPresenter eventPresenter = new EventPresenter();
         eventPresenter.printEvents(eventModel.getModel());
         RequestFacade otherEventFacade = new RequestFacade(
                 new RequestController[] {
+                        new PendingEventController(eventManager),
+                        new ApproveEventsController(accountManager, eventManager, eventModel, uname),
                         new ViewEventNotHostController(eventModel, eventManager, commentModel, commentManager, likeManager, likeModel),
                         new ReturnController()
                 }

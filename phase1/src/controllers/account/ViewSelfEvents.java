@@ -3,10 +3,7 @@ package controllers.account;
 import controllers.appWide.RequestController;
 import controllers.appWide.RequestFacade;
 import controllers.appWide.ReturnController;
-import controllers.event.AddEventController;
-import controllers.event.ChangeInviteRequirementController;
-import controllers.event.DeleteEventController;
-import controllers.event.ViewEventHostController;
+import controllers.event.*;
 import dataMapper.DataMapper;
 import gateway.EventTimeSorter;
 import presenters.EventPresenter;
@@ -68,13 +65,14 @@ public class ViewSelfEvents extends RequestController{
         eventModel.reset();
         eventModel.addItems(
                 eventManager.getEventsHostedBy(requester),
-                new String[]{"title", "queries", "description", "host", "inviteOnly", "attendees", "invitees", "timePosted", "id"}
+                new String[]{"title", "description", "host", "inviteOnly", "attendees", "invitees", "timePosted", "id"}
         );
         EventPresenter eventPresenter = new EventPresenter();
         eventPresenter.printEvents(eventModel.getModel());
         RequestFacade profileFacade = new RequestFacade(
                 new RequestController[] {
                         new AddEventController(eventModel, eventManager),
+                        new PendingEventController(eventManager),
                         new ViewEventHostController(eventModel, eventManager, commentModel, commentManager, likeManager, likeModel),
                         new ReturnController()
                 }

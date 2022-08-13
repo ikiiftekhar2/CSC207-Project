@@ -11,7 +11,7 @@ public class EventPresenter {
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
     /**
      * Displays an event to user.
-     *"host", "title", "description", "id", "timePosted", "inviteOnly", "attendees", "invitees"
+     *
      * @param event a post that needs to be displayed to user
      */
     public void printEvent(HashMap<String, String> event) {

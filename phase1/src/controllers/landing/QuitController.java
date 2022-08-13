@@ -29,6 +29,7 @@ public class QuitController extends RequestController {
      * @param accountManager a use case responsible for managing accounts
      * @param postManager    a use case responsible for managing posts
      * @param likeManager    a use case responsible for managing likes
+     * @param eventManager a use case responsible for managing events
      */
     public QuitController(IAccountManager accountManager, IPostManager postManager, ICommentManager commentManager, ILikeManager likeManager, IEventManager eventManager) {
         this.accountManager = accountManager;

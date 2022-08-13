@@ -3,14 +3,17 @@ import controllers.appWide.RequestFacade;
 import controllers.landing.LoginController;
 import controllers.landing.QuitController;
 import controllers.landing.SignUpController;
-import gateway.IWriter;
-import gateway.Writer;
+import entities.Event;
+import gateway.*;
 import useCases.*;
-import gateway.IReader;
-import gateway.Reader;
+
+import java.util.HashMap;
+import java.util.UUID;
 
 public class App {
     public static void main(String[] args) {
+        HashMap<UUID, Event> curr = new HashMap<>();
+        IMemento memento = new EventsMemento(curr);
         final String userDataFileDirectory = "data/userData.txt";
         final String postDataFileDirectory = "data/postData.txt";
         final String commentDataFileDirectory = "data/commentData.txt";
@@ -32,7 +35,7 @@ public class App {
         IAccountManager accountManager = new AccountManager(reader1, writer1);
         IPostManager postManager = new PostManager(reader2, writer2);
         ILikeManager likeManager = new LikeManager(reader4, writer4);
-        IEventManager eventManager = new EventManager(reader5, writer5);
+        IEventManager eventManager = new EventManager(reader5, writer5, memento);
         IMessageManager messageManager = new MessageManager(reader6, writer6);
         ICommentManager commentManager = new CommentManager(reader3, writer3);
         RequestFacade landingPageFacade = new RequestFacade(new RequestController[]{

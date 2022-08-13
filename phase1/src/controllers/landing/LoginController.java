@@ -4,7 +4,7 @@ import controllers.account.*;
 import controllers.admin.*;
 import controllers.appWide.RequestController;
 import controllers.appWide.RequestFacade;
-import controllers.event.ViewEventHostController;
+import controllers.event.PendingEventController;
 import controllers.search.SearchPostByTitleController;
 import controllers.search.SearchUserByUsernameController;
 import exception.IncorrectPasswordException;
@@ -32,6 +32,8 @@ public class LoginController extends RequestController {
      * @param postManager    a use case responsible for managing posts
      * @param commentManager a user case responsible for managing comments
      * @param likeManager    a use case responsible for managing likes
+     * @param eventManager  a use case responsible for managing events
+     * @param messageManager a use case responsible for managing messages
      */
     public LoginController(IAccountManager accountManager, IPostManager postManager, ICommentManager commentManager, ILikeManager likeManager,IMessageManager messageManager, IEventManager eventManager){
         this.accountManager = accountManager;

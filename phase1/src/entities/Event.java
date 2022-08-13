@@ -12,10 +12,6 @@ public class Event implements Serializable {
      */
     String title;
     /**
-     * the queries of the event
-     */
-    HashMap<UUID, QuestionAnswer> queries;
-    /**
      * the description of an event
      */
     String description;
@@ -32,7 +28,7 @@ public class Event implements Serializable {
      */
     HashSet<String> attendees;
     /**
-     * the attendees of the event
+     * the invitees of the event
      */
     HashSet<String> invitees;
     /**
@@ -53,7 +49,6 @@ public class Event implements Serializable {
         this.inviteOnly = inviteOnly;
         this.invitees = invitees;
         this.attendees = new HashSet<String>();
-        this.queries = new HashMap<UUID, QuestionAnswer>();
     }
 
     public void setTitle(String title) {
@@ -66,11 +61,6 @@ public class Event implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public void addQueries(String question, String username) {
-        QuestionAnswer data = new QuestionAnswer(question, username);
-        this.queries.put(data.getId(), data);
     }
 
     public void addAttendees(String username) {
@@ -103,10 +93,6 @@ public class Event implements Serializable {
 
     public Boolean getInviteOnly() {
         return inviteOnly;
-    }
-
-    public HashMap<UUID, QuestionAnswer> getQueries() {
-        return queries;
     }
 
     public HashSet<String> getAttendees() {

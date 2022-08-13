@@ -17,12 +17,16 @@ public class ChangeInviteRequirementController extends RequestController {
         this.eventManager = eventManager;
         this.eventModel = eventModel;
     }
-
+    /**
+     * @inheritDoc
+     */
     @Override
     public String getRequestDescription() {
         return "Change Invite Only requirement";
     }
-
+    /**
+     * @inheritDoc
+     */
     @Override
     public boolean handleRequest(String requester) {
         presenter.inlinePrint("Current Status of Invitation Requirement was set as ");
@@ -30,7 +34,7 @@ public class ChangeInviteRequirementController extends RequestController {
         presenter.inlinePrint(result.toString());
         eventManager.getEvent(UUID.fromString(requester)).setInviteOnly(!result);
         eventModel.deleteItem("id", requester);
-        String[] attributes = new String[]{"title", "queries", "description", "host", "inviteOnly", "attendees", "invitees", "timePosted", "id"};
+        String[] attributes = new String[]{"title", "description", "host", "inviteOnly", "attendees", "invitees", "timePosted", "id"};
         eventModel.addItem(eventManager.getEvent(UUID.fromString(requester)), attributes);
         presenter.inlinePrint("\n Successfully Changed to " + !result);
 

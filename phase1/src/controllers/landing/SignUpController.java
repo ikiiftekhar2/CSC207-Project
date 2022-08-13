@@ -32,7 +32,7 @@ public class SignUpController extends RequestController {
      */
     private ICommentManager commentManager;
     /**
-     * a request facade containing request controllers for comments
+     * a request facade containing request controllers for events
      */
     private IEventManager eventManager;
     /**

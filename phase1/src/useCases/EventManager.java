@@ -1,9 +1,7 @@
 package useCases;
 
 import entities.Event;
-import gateway.IEventSorter;
-import gateway.IReader;
-import gateway.IWriter;
+import gateway.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,6 +25,10 @@ public class EventManager implements IEventManager{
      *  a sorter that sorts an arraylist of events
      */
     IEventSorter eventSorter;
+    /**
+     *  an event memento Object
+     */
+    IMemento memento;
 
     /**
      * Constructor of a use case responsible for managing events.
@@ -34,10 +36,11 @@ public class EventManager implements IEventManager{
      * @param reader a gateway responsible for reading objects
      * @param writer a gateway responsible for writing objects
      */
-    public EventManager(IReader reader, IWriter writer) {
+    public EventManager(IReader reader, IWriter writer, IMemento memento) {
         this.reader = reader;
         this.writer = writer;
         events = reader.read(events.getClass());
+        this.memento = memento;
     }
 
     /**
@@ -76,7 +79,9 @@ public class EventManager implements IEventManager{
     @Override
     public UUID addEvent(String title, String description, String host, Boolean inviteOnly, HashSet<String> invitees) {
         Event event = createEvent(title, description, host, inviteOnly, invitees);
-        events.put(event.getId(), event);
+        HashMap<UUID, Event> newEvent = memento.getSavedEvent();
+        newEvent.put(event.getId(), event);
+        memento.setSavedEvent(newEvent);
         return event.getId();
     }
 
@@ -111,6 +116,9 @@ public class EventManager implements IEventManager{
     public HashMap<UUID, Event> getEventMap(){
         return events;
     }
+    /**
+     * @inheritDoc
+     */
     @Override
     public Boolean attendEvent(String username, UUID id){
         Event event = getEvent(id);
@@ -125,10 +133,26 @@ public class EventManager implements IEventManager{
             return true;
         }
     }
+    /**
+     * @inheritDoc
+     */
     @Override
     public void setEventSorter(IEventSorter eventSorter) {
         this.eventSorter = eventSorter;
     }
-
+    /**
+     * @inheritDoc
+     */
+    public HashMap<UUID, Event> getPendingEvents() {
+        return memento.getSavedEvent();
+    }
+    /**
+     * @inheritDoc
+     */
+    public Boolean approveAll() {
+        HashMap<UUID, Event> curr = memento.getSavedEvent();
+        events.putAll(curr);
+        return true;
+    }
 }
 

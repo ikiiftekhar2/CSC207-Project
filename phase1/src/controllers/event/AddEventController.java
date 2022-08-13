@@ -58,9 +58,7 @@ public class AddEventController extends RequestController {
             }
         }
         UUID eventId = eventManager.addEvent(title,description, requester, inviteOnly, invitees);
-        String[] attributes = new String[]{"title", "queries", "description", "host", "inviteOnly", "attendees", "invitees", "timePosted", "id"};
-        eventModel.addItem(eventManager.getEvent(eventId), attributes);
-        presenter.blockPrint("Event successfully created!");
+        presenter.inlinePrint("Submitted to admins for reviews");
         return false;
     }
 }

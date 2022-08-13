@@ -12,7 +12,7 @@ of this application also consists of hosting events alongside sharing messages b
 4. **Like Functionality** - Users can like posts and each like is tied to post/event and the function stores and shows the user the time the like was given, the total like count, the people who have given the like. Users can like their own posts/events, however they cannot give like twice on the same posts/events.
 5. **Search Functionality** - Users have the option to search for a post by its title and also for usernames of people present in the application. Different search algorithms are used in the different function to give the best output for both types of content that is being searched. The user is shown the most matched item as the first result and the least matched item at the last.
 6. **Comment Functionality** - Users can comment on posts and each comment is tied to post/event and the function stores and shows the user the time the comment was posted, the people who commented. Users can comment on their own posts/events.
-7. **Message System** -
+7. **Message System** - Users can send each other text messages and view an inbox of messages sent to them by other users. The messages in the inbox are displayed with the sending user's name and date and time the message was sent.
 
 ###### **_**As of making the application, the project was moved from phase1 to phase2 folder, this may cause the division of work to be misinterpreted. Hence, we suggest seeing the git logs to see the contribution logs of each file.**_**
 # Cloning the repository
@@ -38,16 +38,22 @@ individually before you run the `App.java` file.
   * View your followers/following -  This feature shows you the list of the usernames that follows you and you are following
   * View Events Others Hosted - This feature allows you to see Events that people you follow hosted.
   * View Events you Hosted - This feature allows you to see events that you hosted.
-  * View your profile -  This feature allows you to see posts that you created
+  * View your profile -  This feature allows you to see/create posts that you created and send/view messages
   * View feed - Theis feature allows you to see posts, the people you follow posted
   * Search for a post by its title 
   * Search for a user by their username
+  * Send a message(inside View your profile menu option) - Send a message to another user
+  * View Inbox(inside View your profile menu option) - View all the messages sent to you by other users
   * Log out of your account
-- **General Note about Event and Post** - Both of these features are multi-menu features. Once you click on options that allow you to access them, you will be greeted with a multi menu option.
-    For `Events`, you can view Pending Events and Approving pending Events option (if you are viewing other's events). If you are viewing your profile (posts) or events you hosted, you will have the option to create a new/event or post and give information about the relevant data's discussed in features (above). You can view your own post/event as well. The program will ask you to select the event/post amongst a list of events/posts. After you have selected the desired event/post, you will be prompted options to add/view like (like also supports removing) and comments. For events, you can choose to join the event. If you are the host of the event and post, you can delete them both. For events, as the host you can also change the invitation requirement. At any point in time, you can go back to the previous page with the instructions shown at that page.
+- **General Note about Event, Post and Messages** - 
+  * These features are multi-menu features. Once you click on options that allow you to access them, you will be greeted with a multi menu option.
+  * For `Events`, you can view Pending Events and Approving pending Events option (if you are viewing other's events). If you are viewing your profile (posts) or events you hosted, you will have the option to create a new/event or post and give information about the relevant data's discussed in features (above).
+  * You can view your own post/event as well. The program will ask you to select the event/post amongst a list of events/posts. After you have selected the desired event/post, you will be prompted options to add/view like (like also supports removing) and comments.
+  * For events, you can choose to join the event. If you are the host of the event and post, you can delete them both. For events, as the host you can also change the invitation requirement. At any point in time, you can go back to the previous page with the instructions shown at that page.
+  * To send a message to another user, select the Send a message menu option from the View your profiles menu option and enter in the recipient's name.
  
 * # Notes about testing the application
-* - The "main app" is found in the file `App.java`. Run that file and the app should be running in the console in Intellij.
+* The "main app" is found in the file `App.java`. Run that file and the app should be running in the console in Intellij.
 - By default, there is already an admin user stored in `data/userData.txt` (it is the only account in that file when you first run `App.java`). This is mainly because admins can only be created from other admins. Thus, we need some "starting admin" account.
 - The login information for the "starting admin" is as follows:
     - username: admin

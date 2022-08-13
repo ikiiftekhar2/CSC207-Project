@@ -3,6 +3,7 @@ import org.junit.Test;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.*;
 
@@ -30,9 +31,10 @@ public class CommentTest {
     }
 
     @Test
-    public void testGetTimePostedIsBefore() {
+    public void testGetTimePostedIsBefore() throws InterruptedException {
         UUID postId = UUID.randomUUID();
         Comment comment = new Comment(postId, "Test content", "Test author");
+        TimeUnit.SECONDS.sleep(2);
         LocalDateTime afterTime = LocalDateTime.now();
         assertTrue(comment.getTimePosted().isBefore(afterTime));
     }

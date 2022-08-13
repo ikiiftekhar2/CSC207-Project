@@ -5,7 +5,12 @@ import java.util.Collections;
 
 public class SimilarityScoreLevenshtein implements ISimilarityScore{
 
-    /** @return an array of adjacent letter pairs contained in the input string */
+    /*
+      This function returns the similarity score between two strings using the Levenshtein distance method.
+      This algorithm has shown to perform better in long text searches
+      **/
+
+    /** @return an array of adjacent letter pairs contained in the input string assisting the edit distance algorithm*/
     private String[] letterPairs(String str) {
 
         int numPairs = str.length()-1;
@@ -19,7 +24,7 @@ public class SimilarityScoreLevenshtein implements ISimilarityScore{
         return pairs;
 
     }
-    /** @return an ArrayList of 2-character Strings. */
+    /** @return an ArrayList of 2-character Strings. which assists the edit distance algorithm*/
 
     private ArrayList<String> wordLetterPairs(String str) {
 
@@ -43,7 +48,7 @@ public class SimilarityScoreLevenshtein implements ISimilarityScore{
         return allPairs;
 
     }
-    /** @return lexical similarity value in the range [0,1] */
+    /** @return lexical similarity value in the range [0,1] which is used in other parts of the program*/
 
     public double getSimilarityScore(String str1, String str2) {
 

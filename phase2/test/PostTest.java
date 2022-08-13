@@ -2,6 +2,7 @@ import entities.Post;
 import org.junit.Test;
 
 import java.time.LocalDateTime;
+import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.*;
 
@@ -40,8 +41,9 @@ public class PostTest {
     }
 
     @Test
-    public void testGetTimePostedIsAfter() {
+    public void testGetTimePostedIsAfter() throws InterruptedException {
         LocalDateTime beforeTime = LocalDateTime.now();
+        TimeUnit.SECONDS.sleep(3);
         Post post = new Post("Test Title", "Test Content", "author");
         assertTrue(post.getTimePosted().isAfter(beforeTime));
     }
@@ -49,6 +51,11 @@ public class PostTest {
     @Test
     public void testGetTimePostedIsBefore() {
         Post post = new Post("Test Title", "Test Content", "author");
+        try {
+            TimeUnit.SECONDS.sleep(3);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         LocalDateTime afterTime = LocalDateTime.now();
         assertTrue(post.getTimePosted().isBefore(afterTime));
     }

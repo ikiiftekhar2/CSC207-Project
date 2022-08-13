@@ -11,20 +11,25 @@ public class MessageTest {
     @Test
     public void testGetMessage(){
         Message message = new Message("Rahdin", "Iftekhar", "Hello World");
-        assertEquals("Hello World", messsage.getMessage());
+        assertEquals("Hello World", message.getMessage());
     }
 
     @Test
     public void testGetReceiver() {
         Message message = new Message("Rahdin", "Iftekhar", "Hello World");
-        assertEquals("Iftekhar", messsage.getReceiver());
+        assertEquals("Iftekhar", message.getReceiver());
     }
 
     @Test
     public void testGetTimeSentIsAfter() {
         LocalDateTime beforeTime = LocalDateTime.now();
         Message message = new Message("Rahdin", "Iftekhar", "Hello World");
-        assertEquals(message.getTimeSent().isAfter(beforeTime));
+        try {
+            TimeUnit.SECONDS.sleep(3);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        assertTrue(message.getTimeSent().isAfter(beforeTime));
     }
 
 }

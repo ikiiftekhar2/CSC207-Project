@@ -11,14 +11,14 @@ public class LikeTest {
     @Test
     public void testGetPostId() {
         UUID postId = UUID.randomUUID();
-        Like like = new Like(postId, "Rahdin")
-        assertEquals(postId, like.getId());
+        Like like = new Like(postId, "Rahdin");
+        assertEquals(postId, like.getPostID());
     }
 
     @Test
     public void testGetLiker() {
         UUID postId = UUID.randomUUID();
-        Like like = new Like(postId, "Rahdin")
+        Like like = new Like(postId, "Rahdin");
         assertEquals("Rahdin", like.getLiker());
     }
 }

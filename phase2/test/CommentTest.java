@@ -23,9 +23,10 @@ public class CommentTest {
     }
 
     @Test
-    public void testGetTimePostedIsAfter() {
+    public void testGetTimePostedIsAfter() throws InterruptedException {
         LocalDateTime beforeTime = LocalDateTime.now();
         UUID postId = UUID.randomUUID();
+        TimeUnit.SECONDS.sleep(3);
         Comment comment = new Comment(postId, "Test content", "Test author");
         assertTrue(comment.getTimePosted().isAfter(beforeTime));
     }

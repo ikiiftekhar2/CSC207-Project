@@ -11,6 +11,9 @@ import exception.IncorrectPasswordException;
 import exception.UsernameNotFoundException;
 import exception.AccountBannedException;
 import gateway.ISearch;
+import gateway.ISimilarityScore;
+import gateway.SimilarityScoreJaroWrinkler;
+import gateway.SimilarityScoreLevenshtein;
 import searchHandler.SearchByUsernameAdmin;
 import searchHandler.SearchByUsernameRegular;
 import useCases.*;
@@ -37,8 +40,9 @@ public class LoginController extends RequestController {
      */
     public LoginController(IAccountManager accountManager, IPostManager postManager, ICommentManager commentManager, ILikeManager likeManager,IMessageManager messageManager, IEventManager eventManager){
         this.accountManager = accountManager;
-        ISearch searchForRegularUsers = new SearchByUsernameRegular(accountManager);
-        ISearch searchForAdmin = new SearchByUsernameAdmin(accountManager);
+        ISimilarityScore similarityScoreJaroWrinkler = new SimilarityScoreJaroWrinkler();
+        ISearch searchForRegularUsers = new SearchByUsernameRegular(accountManager, similarityScoreJaroWrinkler);
+        ISearch searchForAdmin = new SearchByUsernameAdmin(accountManager, similarityScoreJaroWrinkler );
         accountRequestFacade = new RequestFacade(new RequestController[]{
                 new ViewHistoryController(accountManager),
                 new ViewOtherEvents(eventManager, accountManager, commentManager, likeManager),

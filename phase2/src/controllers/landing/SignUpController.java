@@ -12,7 +12,9 @@ import exception.UsernameExistsException;
 import gateway.ISearch;
 import searchHandler.SearchByUsernameRegular;
 import useCases.*;
-
+import gateway.ISimilarityScore;
+import gateway.SimilarityScoreLevenshtein;
+import gateway.SimilarityScoreJaroWrinkler;
 
 public class SignUpController extends RequestController {
     /**
@@ -53,7 +55,8 @@ public class SignUpController extends RequestController {
         this.accountManager = accountManager;
         this.commentManager = commentManager;
         this.messageManager = messageManager;
-        ISearch searchForRegularUsers = new SearchByUsernameRegular(accountManager);
+        ISimilarityScore similarityScoreJaroWrinkler = new SimilarityScoreJaroWrinkler();
+        ISearch searchForRegularUsers = new SearchByUsernameRegular(accountManager, similarityScoreJaroWrinkler);
         accountRequestFacade = new RequestFacade(new RequestController[]{
             new ViewHistoryController(accountManager),
             new DeleteSelfController(accountManager, postManager),

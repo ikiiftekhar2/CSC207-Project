@@ -8,6 +8,10 @@ import java.util.*;
 
 public class SearchByUsernameAdmin implements ISearch{
     /**
+     * the similarity used by this search algorithm
+     */
+    ISimilarityScore similarityScore;
+    /**
      * a use case responsible for managing accounts.
      */
     IAccountManager accountManager;
@@ -16,8 +20,9 @@ public class SearchByUsernameAdmin implements ISearch{
      *
      * @param accountManager a use case responsible for managing.
      */
-    public SearchByUsernameAdmin(IAccountManager accountManager) {
+    public SearchByUsernameAdmin(IAccountManager accountManager, ISimilarityScore similarityScore) {
         this.accountManager = accountManager;
+        this.similarityScore = similarityScore;
     }
     /**
      * Perform the search operation using the specified string.
@@ -29,8 +34,7 @@ public class SearchByUsernameAdmin implements ISearch{
         HashMap<String, Account> curr = accountManager.getMap();
         Map<String, Double> map = new HashMap<>();
         for (String key: curr.keySet()) {
-            SimilarityScoreJaroWrinkler score = new SimilarityScoreJaroWrinkler();
-            map.put(key,score.getSimilarityScore(key,query));
+            map.put(key,similarityScore.getSimilarityScore(key,query));
         }
         ArrayList<Map.Entry> sorted = sortMap(map);
         ArrayList<String> results = new ArrayList<>();

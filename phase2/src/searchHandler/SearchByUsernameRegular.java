@@ -9,6 +9,10 @@ import java.util.*;
 
 public class SearchByUsernameRegular implements ISearch{
     /**
+     * the similarity used by this search algorithm
+     */
+    ISimilarityScore similarityScore;
+    /**
      * a use case responsible for managing accounts.
      */
     IAccountManager accountManager;
@@ -17,8 +21,9 @@ public class SearchByUsernameRegular implements ISearch{
      *
      * @param accountManager a use case responsible for managing.
      */
-    public SearchByUsernameRegular(IAccountManager accountManager) {
+    public SearchByUsernameRegular(IAccountManager accountManager, ISimilarityScore similarityScore) {
         this.accountManager = accountManager;
+        this.similarityScore = similarityScore;
     }
     /**
      * Perform the search operation using the specified string.
@@ -31,8 +36,7 @@ public class SearchByUsernameRegular implements ISearch{
         Map<String, Double> map = new HashMap<>();
         for (String key: curr.keySet()) {
             if(!accountManager.getUser(key).getIsBanned()) {
-                SimilarityScoreJaroWrinkler score = new SimilarityScoreJaroWrinkler();
-                map.put(key, score.getSimilarityScore(key, query));
+                map.put(key, similarityScore.getSimilarityScore(key, query));
             }
         }
         ArrayList<Map.Entry> sorted = sortMap(map);

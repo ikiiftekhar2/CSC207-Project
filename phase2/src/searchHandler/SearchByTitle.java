@@ -8,6 +8,10 @@ import java.util.*;
 
 public class SearchByTitle implements ISearch{
     /**
+     * the similarity used by this search algorithm
+     */
+    ISimilarityScore similarityScore;
+    /**
      * a use case responsible for managing posts.
      */
     private IPostManager postManager;
@@ -16,8 +20,9 @@ public class SearchByTitle implements ISearch{
      *
      * @param postManager a use case responsible for managing postss.
      */
-    public SearchByTitle(IPostManager postManager) {
+    public SearchByTitle(IPostManager postManager, ISimilarityScore similarityScore) {
         this.postManager = postManager;
+        this.similarityScore = similarityScore;
     }
     /**
      * Perform the search operation using the specified string.
@@ -31,8 +36,7 @@ public class SearchByTitle implements ISearch{
         for(Map.Entry<UUID, Post> entry : curr.entrySet()) {
             String key = entry.getKey().toString();
             String value = entry.getValue().getTitle();
-            SimilarityScoreLevenshtein score = new SimilarityScoreLevenshtein();
-            map.put(postManager.getPost(entry.getKey()).getTitle(),score.getSimilarityScore(value,query));
+            map.put(postManager.getPost(entry.getKey()).getTitle(),similarityScore.getSimilarityScore(value,query));
         }
         ArrayList<Map.Entry> sorted = sortMap(map);
         ArrayList<String> results = new ArrayList<>();

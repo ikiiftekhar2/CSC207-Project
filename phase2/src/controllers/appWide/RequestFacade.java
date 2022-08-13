@@ -1,10 +1,15 @@
 package controllers.appWide;
-
+import controllers.appWide.IMenuAdapter;
 import presenters.Presenter;
 
+import java.util.ArrayList;
 
 
 public class RequestFacade {
+    /**
+     * an adapter responsible for adapting this class with a presenter that prints menus.
+     */
+    IMenuAdapter menuAdapter = new MenuAdapter();
     /**
      * an array of RequestControllers that can be called by the request menu of the request facade
      */
@@ -54,12 +59,7 @@ public class RequestFacade {
      * Presents a menu of requests where the user can pick a request by inputting a number.
      */
     public void presentRequest() {
-        presenter.blockPrint("");
-        presenter.blockPrint(requests);
-        presenter.input();
-        presenter.inlinePrint("Please enter your request: ");
-        String request = presenter.input.nextLine();
-        presenter.blockPrint("");
+        String request = menuAdapter.printMenu(requests);
         handleRequest(request);
     }
 
@@ -74,15 +74,8 @@ public class RequestFacade {
      * Builds a string representing a menu of requests that will be presented to the user.
      */
     protected void buildRequests() {
-        int requestNumber = 0;
-        StringBuilder requestsBuilder = new StringBuilder();
-        for (RequestController controller : requestControllers) {
-            requestsBuilder.append(requestNumber);
-            requestsBuilder.append(" - ");
-            requestsBuilder.append(controller.getRequestDescription());
-            requestsBuilder.append("\n");
-            requestNumber++;
-        }
-        requests = requestsBuilder.toString();
+        requests = menuAdapter.buildMenu(requestControllers);
     }
 }
+
+

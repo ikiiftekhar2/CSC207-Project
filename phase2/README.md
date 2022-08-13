@@ -67,3 +67,13 @@ individually before you run the `App.java` file.
 # Use of code from online 
 - the hashing method in the class `PasswordHash.java`, `SimilarityScoreLevenshtein.Java` and `SimilarityScoreJaroWrinkler.Java` was not fully implemented on our own.
 - They were taken from online sources.
+
+# Design Document 1 (UML Diagrams) - Appendix
+
+- Page 1 - Post System
+- Page 2 - Message System
+- Page 3 - Account System
+- Page 4 - Like System
+- Page 5 - Comment System
+- Page 6 - Search System
+- Page 7 - Events System

@@ -1,3 +1,5 @@
+
+
 # Social Media Application
 Description:
 - A Social Media Application that started off as a simple blogging app consisting of posts, likes comments. The app eventually evolved into a semi-fully fledged `Command Line Interface (CLI)` based social media application as the scope of the project grew bigger. The current version

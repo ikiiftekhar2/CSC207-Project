@@ -4,6 +4,7 @@
 Description:
 - A Social Media Application that started off as a simple blogging app consisting of posts, likes comments. The app eventually evolved into a semi-fully fledged `Command Line Interface (CLI)` based social media application as the scope of the project grew bigger. The current version
 of this application also consists of hosting events alongside sharing messages between users. The target of this application is for its features to adhere to clean architecture principles and implement Design Patterns. The current version of the application utilises `Façade`, `Strategy Pattern`, `Memento Pattern` and `Adapter Pattern`
+- To run the live version on Repl [click here!](https://replit.com/@ikiiftekhar2/Social-Media-Application-CSC207-Project?v=1#README.md)
 
 # Features: 
 1. **Account System** - Users can Login or Sign Up at the starting sequence of the application. Users can either be admin or regular users. They can follow each other and see their login history and followers and followees.
